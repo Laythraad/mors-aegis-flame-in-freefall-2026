@@ -35,6 +35,18 @@ test('AI interpretation rejects numbers and unsupported universal, causal, or sa
   ]) assert.equal(validateQualitativeInterpretation(answer), null, answer);
 });
 
+test('AI interpretation rejects contradictory data-availability claims and requires scope language', () => {
+  for (const answer of [
+    'The table does not contain the requested measurements.',
+    'The result cannot be determined from this dataset.',
+    'The trends appear consistent across the experiment.'
+  ]) assert.equal(validateQualitativeInterpretation(answer), null, answer);
+  assert.equal(
+    validateQualitativeInterpretation('This is a descriptive result within the selected source-table context.'),
+    'This is a descriptive result within the selected source-table context.'
+  );
+});
+
 test('AI interpretation rejects empty or oversized model output', () => {
   assert.equal(validateQualitativeInterpretation('  '), null);
   assert.equal(validateQualitativeInterpretation('a'.repeat(601)), null);

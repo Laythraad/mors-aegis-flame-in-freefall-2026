@@ -1,4 +1,9 @@
 # Changelog
+## 3.0.0-alpha.16 — 2026-11-15
+
+- Reject AI statements that contradict a successfully computed result, including claims that the source data is absent or unusable.
+- Require source-scope language for qualitative notes and clarify that the model may only explain the descriptive scope.
+
 ## 3.0.0-alpha.15 — 2026-11-15
 
 - Keep raw measurements, calculated values, and prior chat history out of AI interpretation prompts when a verified numeric result is shown separately.
