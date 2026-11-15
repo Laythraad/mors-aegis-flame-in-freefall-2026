@@ -1,3 +1,10 @@
+## 3.0.0-alpha.19 — 2026-11-15
+
+- Added a first-visit and Settings accent-color picker with automatic contrast adjustment; scientific chart series retain their evidence meanings.
+- Promoted the AI Copilot on the overview and documented its deterministic calculation, bounded interpretation, citation, and fallback workflow.
+- Added a PSI-69 fuel-by-reported-outcome count matrix with source and scope caveats.
+- Updated the seven-slide submission deck to feature the AI workflow and removed server and tunnel details.
+
 # Changelog
 ## 3.0.0-alpha.18 — 2026-11-15
 
