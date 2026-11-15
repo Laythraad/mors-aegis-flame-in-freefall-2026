@@ -1,4 +1,9 @@
 # Changelog
+## 3.0.0-alpha.17 — 2026-11-15
+
+- Simplified the quantitative AI prompt to one evidence-bounded scope task, removing conflicting instructions that led Qwen to deny available results.
+- Added `curl` to the runtime image so Coolify's configured HTTP health check can reach `/healthz`.
+
 ## 3.0.0-alpha.16 — 2026-11-15
 
 - Reject AI statements that contradict a successfully computed result, including claims that the source data is absent or unusable.

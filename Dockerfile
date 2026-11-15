@@ -1,4 +1,5 @@
 FROM node:22-alpine
+RUN apk add --no-cache curl
 WORKDIR /app
 COPY package.json server.mjs ./
 COPY ms02-connectors ./ms02-connectors

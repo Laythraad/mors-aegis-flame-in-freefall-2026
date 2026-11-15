@@ -10,7 +10,7 @@ Configure the Coolify application to use:
 - Branch: `main`
 - Build method: the root `Dockerfile`
 - Container port: `4173`
-- Health check: `GET /healthz` on port `4173`
+- Health check: `GET /healthz` on port `4173` (the Docker image includes `curl` for Coolify's probe).
 
 The Dockerfile binds inside the container to `0.0.0.0:4173`, enables the guarded network binding, and runs Node as the unprivileged `node` user. Keep the application behind Coolify's proxy; do not publish port `4173` directly on the host.
 

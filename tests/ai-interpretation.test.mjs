@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildModelContext, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
+import { buildModelContext, buildSystemPrompt, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
 
 test('AI receives only a qualitative scope when a verified calculation is shown separately', () => {
   const context = buildModelContext({
@@ -17,6 +17,13 @@ test('AI receives only a qualitative scope when a verified calculation is shown 
 test('non-quantitative AI questions retain their source context', () => {
   const sourceContext = { dataset: 'NASA PSI evidence', limitations: 'source scope' };
   assert.equal(buildModelContext(sourceContext, false), sourceContext);
+});
+
+test('quantitative AI prompt has a single plain-language scope task', () => {
+  const prompt = buildSystemPrompt({ verifiedResultDisplayedSeparately: true }, 'Local Ollama');
+  assert.match(prompt, /numeric answer has already been computed/);
+  assert.match(prompt, /descriptive and belongs to the selected NASA source-table context/);
+  assert.doesNotMatch(prompt, /When a number or fact is absent/);
 });
 
 test('AI interpretation accepts a cautious qualitative note beside deterministic results', () => {

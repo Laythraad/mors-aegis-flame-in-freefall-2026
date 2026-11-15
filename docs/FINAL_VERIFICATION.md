@@ -53,7 +53,7 @@ The public AI Copilot uses Qwen 2.5 3B on the separate RTX 4060 PC over private 
 - `node --check ms02-connectors/challenge-data/catalog.mjs` — passed.
 - `node --check ms02-connectors/registry.mjs` — passed.
 - `npm run lint` — passed with ESLint 10.
-- `npm test` — **101 passed, 0 failed**. Coverage includes source integrity and row preservation, curated study-analysis fields and limitations, interactive plot behavior, 3D model inventory/state handling, theme contrast, AI-response claim filtering, unknown-source rejection, API contracts, security boundaries, unsupported old-feed endpoints, FLEX normalization/units, statistical boundaries, authentication, deterministic replay, and rejection of caller-supplied datasets by the workflow API.
+- `npm test` — **102 passed, 0 failed**. Coverage includes source integrity and row preservation, curated study-analysis fields and limitations, interactive plot behavior, 3D model inventory/state handling, theme contrast, AI-response claim filtering, unknown-source rejection, API contracts, security boundaries, unsupported old-feed endpoints, FLEX normalization/units, statistical boundaries, authentication, deterministic replay, and rejection of caller-supplied datasets by the workflow API.
 - `npm run lint` — passed; the ignored presentation QA directory is excluded and browser globals are declared.
 - The seven-slide English PowerPoint was exported from the existing branded deck, imported and finalized with the presentation tool. It preserves the 16:9 / Arial style, contains one editable, workbook-backed chart, and includes QR codes for the live site and GitHub repository.
 
