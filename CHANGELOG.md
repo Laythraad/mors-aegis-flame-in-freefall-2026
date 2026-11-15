@@ -1,4 +1,8 @@
 # Changelog
+## 3.0.0-alpha.11 — 2026-11-15
+
+- Tightened AI evidence grounding: factual claims and numeric thresholds must come directly from supplied NASA PSI context; limitation answers cannot add unsupported items.
+
 ## 3.0.0-alpha.10 — 2026-11-15
 
 - Enabled the public, same-origin, rate-limited research Copilot endpoint while keeping all other write APIs blocked in public read-only mode.
