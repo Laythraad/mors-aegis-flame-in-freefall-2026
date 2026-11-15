@@ -1,3 +1,7 @@
+## 3.0.0-alpha.20 — 2026-11-15
+
+- Added a narrated 30-second English project film and a dedicated in-app watch/download page.
+
 ## 3.0.0-alpha.19 — 2026-11-15
 
 - Added a first-visit and Settings accent-color picker with automatic contrast adjustment; scientific chart series retain their evidence meanings.

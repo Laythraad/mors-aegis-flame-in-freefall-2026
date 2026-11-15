@@ -1,0 +1,10 @@
+.project-film { max-width: 1100px; margin-inline: auto; overflow: hidden; }
+.project-film-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #030813; box-shadow: 0 20px 70px rgba(0,0,0,.28); }
+.project-film video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: radial-gradient(ellipse at 50% 55%, #163c5e 0, #071426 52%, #02050b 100%); }
+.project-film-meta { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 4px; }
+.project-film-meta h2 { margin: 7px 0; }
+.project-film-meta .sub { max-width: 720px; }
+.film-transcript { border-top: 1px solid var(--line); padding: 16px 4px; }
+.film-transcript summary { cursor: pointer; color: var(--link); font-weight: 700; }
+.film-transcript p { max-width: 78ch; line-height: 1.8; }
+@media (max-width: 680px) { .project-film-meta { align-items: flex-start; flex-direction: column; } .project-film-meta .primary-btn { width: 100%; } }

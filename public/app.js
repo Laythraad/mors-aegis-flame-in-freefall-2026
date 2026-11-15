@@ -46,6 +46,7 @@ const nav = [
   ['Analysis Workbench', 'FLEX-only descriptive analysis', '∑', 'ANALYSIS'],
   ['Chart Guide', 'Chart purposes, variables & limits', '▥', 'ANALYSIS'],
   ['Comparison Studio', 'Compare matched FLEX tests', '◫', 'ANALYSIS'],
+  ['Project Video', '30-second English project film', '▶', 'RESEARCH'],
   ['AI Copilot', 'Evidence-grounded research assistant', '✧', 'RESEARCH'],
   ['Sources', 'NASA PSI sources & methods', '◎', 'RESEARCH'],
   ['Reports', 'Scientific reports & exports', '↗', 'RESEARCH'],
@@ -130,6 +131,7 @@ const navArabic = {
   'Analysis Workbench': 'منضدة التحليل',
   'Chart Guide': 'دليل المخططات',
   'Comparison Studio': 'مقارنة التجارب',
+  'Project Video': 'فيديو المشروع',
   'AI Copilot': 'مساعد الأبحاث',
   Sources: 'المصادر والمنهجية',
   Reports: 'التقارير',
@@ -651,6 +653,10 @@ async function sourcesPage() {
 function reports() {
   return `${pageHead(t('Scientific Reports Center', 'مركز التقارير العلمية'), t('Export reproducible source rows, analysis results, or a printable report.', 'صدّر صفوف المصدر ونتائج التحليل أو تقريراً قابلاً للطباعة.'))}<div class="grid three"><article class="card"><div class="eyebrow">${t('DATA', 'البيانات')}</div><h3 style="margin:10px 0">${t('Source table', 'جدول المصدر')}</h3><p class="sub">${t('Observed rows and field names from NASA PSI-69.', 'صفوف مرصودة وأسماء حقول من NASA PSI-69.')}</p><button class="outline-btn" id="downloadCsv">${t('Download CSV', 'تنزيل CSV')}</button></article><article class="card"><div class="eyebrow">${t('REPRODUCIBILITY', 'قابلية الإعادة')}</div><h3 style="margin:10px 0">${t('Analysis package', 'حزمة التحليل')}</h3><p class="sub">${t('JSON with source metadata, summary statistics, validation, and limitations.', 'ملف JSON يحوي بيانات المصدر والإحصاءات والتحقق والقيود.')}</p><button class="outline-btn" id="downloadJson">${t('Download JSON', 'تنزيل JSON')}</button></article><article class="card"><div class="eyebrow">${t('PRESENTATION', 'العرض')}</div><h3 style="margin:10px 0">${t('Scientific summary', 'ملخص علمي')}</h3><p class="sub">${t('Open a printable report and use Save as PDF in your browser.', 'افتح تقريراً قابلاً للطباعة واختر الحفظ بصيغة PDF من المتصفح.')}</p><button class="outline-btn" id="printReport">${t('Print / Save PDF', 'طباعة / حفظ PDF')}</button></article></div><div class="callout" style="margin-top:15px">${t('Exports preserve evidence labels and include DOI, units, methods, and limitations. AI interpretation is not an experimentally verified result.', 'تحافظ الملفات المصدّرة على تصنيفات الأدلة وتشمل DOI والوحدات والطرق والقيود. تفسير الذكاء الاصطناعي ليس نتيجة تجريبية متحققاً منها.')}</div>`;
 }
+function projectVideoPage() {
+  const ar = lang === 'ar';
+  return `${pageHead(ar ? 'فيديو MORS AEGIS' : 'MORS AEGIS · 30-second film', ar ? 'عرض سريع يعرّف بالتحدي والأدلة ومختبرات المشروع ومساعد AI.' : 'A fast, judge-ready introduction to the challenge, evidence, interactive labs, and AI copilot.')}<section class="card project-film"><div class="project-film-frame"><video controls playsinline preload="metadata" poster="/mors-logo.jpg" aria-label="MORS AEGIS: Flame in Freefall, 30-second project film"><source src="/media/mors-aegis-30s.mp4" type="video/mp4">${ar ? 'متصفحك لا يدعم تشغيل الفيديو.' : 'Your browser does not support MP4 video.'}</video></div><div class="project-film-meta"><div><span class="eyebrow">${ar ? 'عرض علمي · 30 ثانية' : 'SCIENCE BRIEF · 30 SECONDS'}</span><h2>${ar ? 'من بيانات ناسا إلى أسئلة تصميم قابلة للاختبار' : 'From NASA evidence to testable design questions'}</h2><p class="sub">${ar ? 'التعليق الصوتي بالإنجليزية. يحتوي الفيديو على بيانات NASA المنشورة، وحدود النماذج ثلاثية الأبعاد، ووظيفة المساعد العلمي.' : 'English narration. The film introduces NASA source data, the limits of the 3D concepts, and the evidence-grounded AI copilot.'}</p></div><a class="primary-btn" href="/media/mors-aegis-30s.mp4" download="MORS-AEGIS-30-second-film.mp4">${ar ? 'تنزيل الفيديو' : 'Download MP4'}</a></div><details class="film-transcript"><summary>${ar ? 'النص الكامل للتعليق الصوتي' : 'Read the narration transcript'}</summary><p>Meet MORS AEGIS: Flame in Freefall. We turn NASA combustion research into a clear, interactive guide to spacecraft fire safety. Explore real experiment records, compare oxygen, pressure, airflow, fuel, and gravity, and see why each condition matters. Our three-dimensional concepts show possible research and response systems; they are not flight-qualified hardware. The AI copilot searches the project evidence, calculates descriptive results, cites its sources, and explains uncertainty. MORS AEGIS connects data, physics, and design questions to help teams prepare safer future missions.</p></details><div class="callout warn">${ar ? 'النماذج المفاهيمية والمخططات التوضيحية ليست معدات مؤهلة ولا نتائج اختبار. القياسات تُنسب لمصادر NASA الأصلية.' : 'Concept models and illustrations are not qualified hardware or test results. Measurements remain attributed to original NASA sources.'}</div></section>`;
+}
 async function health() {
   const h = await get('/api/health');
   $('#dataMode').textContent = t('NASA PSI challenge evidence · offline-ready', 'أدلة تحدي NASA PSI · متاحة دون اتصال');
@@ -685,6 +691,7 @@ const pageMap = {
   'Analysis Workbench': analysisPage,
   'Chart Guide': chartGuidePage,
   'Comparison Studio': comparePage,
+  'Project Video': projectVideoPage,
   'AI Copilot': copilot,
   Sources: sourcesPage,
   Reports: reports,
