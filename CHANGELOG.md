@@ -1,4 +1,9 @@
 # Changelog
+## 3.0.0-alpha.15 — 2026-11-15
+
+- Keep raw measurements, calculated values, and prior chat history out of AI interpretation prompts when a verified numeric result is shown separately.
+- Added a regression check for the AI/data boundary; the seven-slide presentation documents the AI scope and limitations.
+
 ## 3.0.0-alpha.14 — 2026-11-15
 
 - Display deterministic source-cited results separately from the local AI's qualitative note; reject numeric, universal, causal, or safety claims from generated interpretation.

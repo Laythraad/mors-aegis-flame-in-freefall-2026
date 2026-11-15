@@ -49,3 +49,6 @@ Use prerelease increments such as `3.0.0-alpha.3`, `3.0.0-alpha.4`, and so on un
 
 - `backup/pre-v3.0.0-alpha.13-20261115-151231`: ZIP and tag snapshot before separating authoritative results from generated interpretation.
 - `v3.0.0-alpha.14`: deterministic results remain primary; generated qualitative interpretation is separately validated and displayed.
+
+- `backup/pre-v3.0.0-alpha.14-20261115-151815`: ZIP and tag snapshot before restricting quantitative AI prompts to qualitative metadata.
+- `v3.0.0-alpha.15`: raw quantitative evidence and prior chat history stay out of AI interpretation prompts; verified answers remain deterministic.

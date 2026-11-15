@@ -1,6 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
+import { buildModelContext, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
+
+test('AI receives only a qualitative scope when a verified calculation is shown separately', () => {
+  const context = buildModelContext({
+    toolAnalysis: { result: { mean: 0.52, n: 198 } },
+    computedSummary: 'Mean: 0.52 mm²/s',
+    statistics: { sensitiveRawData: true }
+  }, true);
+  assert.equal(context.analysisType, 'descriptive summary');
+  assert.equal(context.verifiedResultDisplayedSeparately, true);
+  assert.equal(JSON.stringify(context).includes('0.52'), false);
+  assert.equal(JSON.stringify(context).includes('sensitiveRawData'), false);
+});
+
+test('non-quantitative AI questions retain their source context', () => {
+  const sourceContext = { dataset: 'NASA PSI evidence', limitations: 'source scope' };
+  assert.equal(buildModelContext(sourceContext, false), sourceContext);
+});
 
 test('AI interpretation accepts a cautious qualitative note beside deterministic results', () => {
   assert.equal(
