@@ -43,3 +43,6 @@ Use prerelease increments such as `3.0.0-alpha.3`, `3.0.0-alpha.4`, and so on un
 
 - `backup/pre-v3.0.0-alpha.11-20261115-145804`: ZIP and tag snapshot before routing limitation questions to deterministic evidence summaries.
 - `v3.0.0-alpha.12`: deterministic, source-cited limits answers; local Qwen remains active for bounded research questions.
+
+- `backup/pre-v3.0.0-alpha.12-20261115-150421`: ZIP and tag snapshot before the full test/lint reconciliation and verification-report refresh.
+- `v3.0.0-alpha.13`: refreshed 36-plot deck/docs and corrected public-mode tests and lint configuration.

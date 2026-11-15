@@ -21,7 +21,7 @@ Search results also surfaced planning or team-formation posts rather than finish
 
 ## What MORS already has
 
-MORS already bundles 16 separate NASA PSI experimental tables (1,329 source rows), has 35 interactive scientific plots, an investigation-level evidence-coverage matrix, a chart guide, source integrity checks, an overview demo path, and a labelled conceptual 3D models page. Those features overlap with several common patterns above. The MORS matrix reports the domains represented in each investigation; it does **not** claim the more specific mission-scenario coverage displayed by MicroFire Atlas.
+MORS already bundles 16 separate NASA PSI experimental tables (1,329 source rows), has 36 interactive scientific plots, an investigation-level evidence-coverage matrix, a chart guide, source integrity checks, an overview demo path, and a labelled conceptual 3D models page. Those features overlap with several common patterns above. The MORS matrix reports the domains represented in each investigation; it does **not** claim the more specific mission-scenario coverage displayed by MicroFire Atlas.
 
 The project keeps investigations separate because their materials, apparatus, fields, units, and outcomes are not harmonized. A future scenario-coverage view would be useful only if each cell retained its exact source record, named every mismatch, separated direct from analogous/mechanistic evidence, and abstained when the required condition was untested. A single cross-study “risk score” or copied prediction would reduce scientific quality.
 

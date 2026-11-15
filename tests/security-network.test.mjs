@@ -39,12 +39,16 @@ test('network binding accepts the configured twelve-character access code minimu
   const response=await fetch(`${base}/api/auth`,{method:'POST',headers:form,body:new URLSearchParams({token:'test-code-12'}),redirect:'manual'});
   assert.equal(response.status,303);
 });
-test('public read-only mode keeps the access gate and disallows mutations', {timeout:20000}, async t=>{
-  const base=await startLanServer(t,{MORS_PUBLIC_READONLY:'1'});
-  assert.equal(await health(base),401);
-  const {cookie}=await login(base);
-  assert.equal((await fetch(`${base}/`,{headers:{cookie}})).status,200);
-  const mutation=await fetch(`${base}/api/copilot`,{method:'POST',headers:{cookie,'content-type':'application/json'},body:'{"question":"Summarize evidence."}'});
+test('public read-only mode serves judges without login and allows only trusted Copilot writes', {timeout:20000}, async t=>{
+  const base=await startLanServer(t,{MORS_PUBLIC_READONLY:'1',MORS_ACCESS_TOKEN:'',MORS_TRUSTED_ORIGINS:'https://judges.example'});
+  assert.equal(await health(base),200);
+  assert.equal((await fetch(`${base}/`)).status,200);
+  const copilot=await fetch(`${base}/api/copilot`,{method:'POST',headers:{origin:'https://judges.example','content-type':'application/json'},body:JSON.stringify({question:'What are the main limitations of PSI-69?'})});
+  assert.equal(copilot.status,200);
+  assert.equal((await copilot.json()).status,'grounded-summary');
+  const untrusted=await fetch(`${base}/api/copilot`,{method:'POST',headers:{origin:'https://attacker.example','content-type':'application/json'},body:'{"question":"What are the main limitations of PSI-69?"}'});
+  assert.equal(untrusted.status,403);
+  const mutation=await fetch(`${base}/api/workflow`,{method:'POST',headers:{origin:'https://judges.example','content-type':'application/json'},body:'{}'});
   assert.equal(mutation.status,405);
   assert.match((await mutation.json()).error,/Read-only public mode/);
 });

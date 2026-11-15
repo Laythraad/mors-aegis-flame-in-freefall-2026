@@ -1,4 +1,10 @@
 # Changelog
+## 3.0.0-alpha.13 — 2026-11-15
+
+- Corrected network-mode documentation and tests for the public, login-free read-only site and its trusted Copilot exception.
+- Synchronized the source-chart inventory at 30 NASA study charts plus six PSI-69/FLEX views (36 total), and refreshed the seven-slide deck count.
+- Fixed lint configuration for standard browser globals and excluded ignored presentation-review artifacts.
+
 ## 3.0.0-alpha.12 — 2026-11-15
 
 - Route limitation questions to a deterministic source-cited answer after the local model repeated unsupported claims about confidence intervals.

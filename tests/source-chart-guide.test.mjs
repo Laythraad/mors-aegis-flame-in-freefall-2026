@@ -8,7 +8,7 @@ import {
 import { renderSourceStudyCharts } from '../public/source-charts.js';
 
 test('every source-table chart uses real fields and renders from its own NASA table', async () => {
-  assert.equal(SOURCE_STUDY_CHARTS.length, 29);
+  assert.equal(SOURCE_STUDY_CHARTS.length, 30);
   const studyIds = [...new Set(SOURCE_STUDY_CHARTS.map(({ studyId }) => studyId))];
   let renderedCharts = 0;
 

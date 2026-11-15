@@ -29,7 +29,7 @@ test('every listed 3D model has an existing GLB and a complete bilingual explana
   }
 });
 
-test('gravity, fan, source, and mist scene states each have a matching visible style', async () => {
+test('gravity, fan, source, mist, and oxygen scene states affect the renderer', async () => {
   const css = await readFile(path.join(root, 'public', '3d-experience.css'), 'utf8');
   const markup = await readFile(path.join(root, 'public', 'lib', 'flame-scene3d.js'), 'utf8');
 
@@ -52,13 +52,14 @@ test('gravity, fan, source, and mist scene states each have a matching visible s
 });
 
 test('the volumetric flame renderer receives independent gravity, fan, mist, fire, and camera states', () => {
-  const scene = { dataset: { fire: 'on', gravity: 'earth', air: 'on', mist: 'off' } };
+  const scene = { dataset: { fire: 'on', gravity: 'earth', air: 'on', mist: 'off', oxygen: '21' } };
   assert.deepEqual(flameVolumeParameters(scene, { rx: -16, ry: -28 }), {
     time: 0,
     gravity: 0,
     air: 1,
     mist: 0,
     fire: 1,
+    oxygen: 9 / 22,
     yaw: (-28 * Math.PI) / 180,
     pitch: (-16 * Math.PI) / 180,
   });
@@ -67,12 +68,14 @@ test('the volumetric flame renderer receives independent gravity, fan, mist, fir
   scene.dataset.air = 'off';
   scene.dataset.mist = 'on';
   scene.dataset.fire = 'off';
+  scene.dataset.oxygen = '34';
   assert.deepEqual(flameVolumeParameters(scene), {
     time: 0,
     gravity: 1,
     air: 0,
     mist: 1,
     fire: 0,
+    oxygen: 1,
     yaw: 0,
     pitch: 0,
   });
@@ -127,6 +130,9 @@ test('the scene state note remains usable in both languages when WebGL is unavai
       dataset: { fire: 'on', gravity: 'earth', air: 'on', mist: 'off', motion: 'paused' },
       style: { setProperty() {} },
       classList: { add() {}, remove() {} },
+      addEventListener(type, handler) {
+        listeners.set(`room:${type}`, handler);
+      },
     };
     const stage = {
       closest() {

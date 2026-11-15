@@ -23,8 +23,8 @@ loadEnvFile();
 export const PORT = Number(process.env.PORT || 4173);
 export const HOST = process.env.HOST || '127.0.0.1';
 export const NETWORK_MODE = !LOOPBACK.includes(HOST);
-// Public deployments can expose read-only research pages and GET endpoints while
-// keeping mutation endpoints (including AI calls) disabled. Off by default.
+// Public deployments expose read-only research pages and GET endpoints, plus the
+// bounded same-origin Copilot request. All other mutation endpoints remain blocked.
 export const PUBLIC_READONLY = process.env.MORS_PUBLIC_READONLY === '1';
 if (NETWORK_MODE && process.env.MORS_ALLOW_NETWORK_BIND !== '1') throw new Error('Non-loopback binding requires explicit MORS_ALLOW_NETWORK_BIND=1 and protected network configuration.');
 export const ACCESS_TOKEN = process.env.MORS_ACCESS_TOKEN || '';

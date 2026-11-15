@@ -11,7 +11,7 @@ const browser = [
   'confirm', 'requestAnimationFrame', 'cancelAnimationFrame', 'getComputedStyle', 'matchMedia',
   'ResizeObserver', 'IntersectionObserver', 'MutationObserver', 'HTMLElement', 'HTMLCanvasElement',
   'Image', 'ImageData', 'File', 'FileReader', 'DOMParser', 'XMLSerializer', 'Path2D', 'OffscreenCanvas',
-  'createImageBitmap', 'CustomEvent', 'KeyboardEvent', 'PointerEvent', 'Worker', 'devicePixelRatio'
+  'createImageBitmap', 'CustomEvent', 'KeyboardEvent', 'PointerEvent', 'Worker', 'devicePixelRatio', 'Option'
 ];
 const node = ['process', 'Buffer', 'global', 'globalThis', 'setImmediate', 'clearImmediate'];
 const asGlobals = names => Object.fromEntries(names.map(name => [name, 'readonly']));
@@ -22,7 +22,7 @@ const rules = {
 };
 
 export default [
-  { ignores: ['node_modules/**', 'dist/**', 'var/**', 'launcher/**', 'public/**/*.bundle.js', 'public/vendor/**'] },
+  { ignores: ['node_modules/**', 'dist/**', 'var/**', 'launcher/**', '.pptx-review/**', '**/.pptx-review/**', 'public/**/*.bundle.js', 'public/vendor/**'] },
   {
     files: ['public/**/*.js'],
     languageOptions: { ecmaVersion: 'latest', sourceType: 'module', globals: asGlobals([...shared, ...browser]) },
