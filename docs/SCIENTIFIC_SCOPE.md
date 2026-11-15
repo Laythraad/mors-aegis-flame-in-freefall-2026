@@ -36,6 +36,9 @@ The Mission Atmospheres page calculates `pO₂` from four NASA historical/refere
 
 EVA preparation is a pressure-transition / decompression-sickness trade involving denitrogenation, pressure, protocols and timing. Oxygen-enriched, lower-pressure atmosphere studies can reduce prebreathe burden, while oxygen-rich atmospheres create additional fire-safety constraints. Similar dry `pO₂` does not mean identical flammability. PSI-20's summary does not resolve pressure by day, so its oxygen labels cannot be matched into a complete pressure–oxygen response matrix.
 
+## Scientific-safety labels shown in Mission Safety
+
+The public page distinguishes four claim types: reported NASA PSI measurements linked to their study and conditions; derived values with named formula, inputs, and units; physical interpretations that remain separate from measurements; and missing mission evidence shown as an open research gap. Mission-relevance ordering is explicitly an inventory-navigation heuristic, never a probability or fire-hazard ranking. NASA incident histories and technology-transfer examples provide context only and are not merged into the PSI experimental data.
 ## Decisions the evidence can support
 
 The app can help prioritize which investigations to inspect, show their conditions/outcomes, reveal missing fields, and turn the evidence into testable design questions: qualify materials across relevant oxygen/pressure/flow environments; control ignition sources; position smoke/CO detection around ventilation; and test suppression against each fuel/material and geometry. It cannot prescribe a spacecraft atmosphere, certify materials, infer a universal safest suppressant, or predict crew fire risk.

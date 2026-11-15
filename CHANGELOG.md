@@ -1,3 +1,8 @@
+## 3.0.0-alpha.23 — 2026-11-15
+
+- Added a bilingual scientific-evidence guide to Mission Safety, separating NASA PSI observations, derived calculations, physical interpretation, and unmeasured lunar/Martian gravity gaps.
+- Expanded the seven-slide competition deck with dry-gas oxygen partial-pressure reference calculations, explicit human-health/flammability limits, citations, and an editable PSI row-count chart with its own embedded data snapshot.
+
 ## 3.0.0-alpha.22 — 2026-11-15
 
 - Use curated, source-cited NASA findings for whole-table limitations questions instead of letting AI generalize from a few retrieved rows.
