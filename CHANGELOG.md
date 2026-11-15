@@ -1,3 +1,7 @@
+## 3.0.0-alpha.22 — 2026-11-15
+
+- Use curated, source-cited NASA findings for whole-table limitations questions instead of letting AI generalize from a few retrieved rows.
+- Tighten Ollama evidence instructions: query-ranked source excerpts are non-representative and cannot support majority, trend, range, or distribution claims.
 ## 3.0.0-alpha.21 — 2026-11-15
 
 - Removed the dedicated 30-second project video and its generated media/build assets at the user's request; retained NASA educational references in the science guide.

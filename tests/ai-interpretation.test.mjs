@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildModelContext, buildSystemPrompt, explicitChallengeId, retrieveChallengeRows, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
+import { buildModelContext, buildSystemPrompt, explicitChallengeId, groundedSourceAnswer, retrieveChallengeRows, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
 
 test('Copilot recognizes explicit investigation IDs and retrieves relevant source rows only', () => {
   assert.equal(explicitChallengeId('Explain PSI 25 oxygen conditions'), 'PSI-25');
@@ -12,6 +12,18 @@ test('Copilot recognizes explicit investigation IDs and retrieves relevant sourc
   ] }, 'PSI-25 oxygen polymer');
   assert.equal(rows.length, 3);
   assert.equal(rows[0].Material, 'polymer');
+});
+
+test('whole-table limitations use curated source findings rather than excerpt-based model guesses', () => {
+  const answer = groundedSourceAnswer(
+    { id: 'PSI-25', title: 'BASS-II', rows: Array.from({ length: 129 }) },
+    [{ evidence: 'OBSERVED + COMPUTED', title: 'Initial oxygen range', value: '13.6–22.2 % by volume', interpretation: 'This is not an isolated oxygen effect or a universal flammability limit.' }],
+    'Summarize PSI-25 source evidence and its limitations',
+  );
+  assert.match(answer, /13\.6–22\.2 % by volume/);
+  assert.match(answer, /not an isolated oxygen effect/);
+  assert.doesNotMatch(answer, /majority|22\.2% of tests/);
+  assert.match(buildSystemPrompt({ sourceRows: 129, citation: 'NASA PSI-25' }, 'Local Ollama'), /query-ranked excerpts and are not representative/);
 });
 
 test('AI receives only a qualitative scope when a verified calculation is shown separately', () => {
