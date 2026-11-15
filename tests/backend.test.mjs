@@ -58,6 +58,8 @@ test('isolated backend contract and defensive boundaries', { timeout: 20000 }, a
     const j = await r.json(); assert.equal(j.status, 'offline-fallback'); assert.match(j.answer, /0\.502/); assert.match(j.answer, /n=258/); assert.match(j.citation, /psi\.nasa\.gov/);
     const record = await (await fetch(`${base}/api/copilot`, { method:'POST', headers:{'content-type':'application/json'}, body:'{"question":"What was the pressure in 20CAL08?"}' })).json();
     assert.equal(record.toolsExecuted[0].tool,'lookupExperiment'); assert.match(record.answer,/20CAL08/); assert.equal(record.analysis,null);
+    const source = await (await fetch(`${base}/api/copilot`, { method:'POST', headers:{'content-type':'application/json'}, body:'{"question":"Summarize NASA PSI-25 oxygen source evidence."}' })).json();
+    assert.equal(source.source.id, 'PSI-25'); assert.equal(source.source.sha256.length, 64); assert.match(source.citation, /psi\.nasa\.gov/); assert.equal(source.toolsExecuted[0].evidence, 'OBSERVED');
     const unrelated = await (await fetch(`${base}/api/copilot`, { method:'POST', headers:{'content-type':'application/json'}, body:'{"question":"What is the capital of France?"}' })).json();
     assert.equal(unrelated.status,'unsupported'); assert.equal(unrelated.toolsExecuted.length,0);
   });

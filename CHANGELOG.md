@@ -1,3 +1,9 @@
+## 3.0.0-alpha.21 — 2026-11-15
+
+- Removed the dedicated 30-second project video and its generated media/build assets at the user's request; retained NASA educational references in the science guide.
+- Added a first-visit welcome panel on the AI-first landing page for language, theme, and accent selection, plus a dedicated Black Hole theme with animated accretion and pointer-following light.
+- Added a conceptual function diagram to each selected 3D system model, alongside its existing live model, purpose, and research value.
+- Added question-aware retrieval from sixteen separately checksummed NASA PSI source tables to the AI Copilot; detailed verified calculations remain PSI-69-only to prevent invalid cross-study pooling.
 ## 3.0.0-alpha.20 — 2026-11-15
 
 - Added a narrated 30-second English project film and a dedicated in-app watch/download page.

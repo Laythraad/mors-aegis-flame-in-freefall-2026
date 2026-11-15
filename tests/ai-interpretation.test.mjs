@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildModelContext, buildSystemPrompt, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
+import { buildModelContext, buildSystemPrompt, explicitChallengeId, retrieveChallengeRows, validateQualitativeInterpretation } from '../src/server/routes/copilot.mjs';
+
+test('Copilot recognizes explicit investigation IDs and retrieves relevant source rows only', () => {
+  assert.equal(explicitChallengeId('Explain PSI 25 oxygen conditions'), 'PSI-25');
+  assert.equal(explicitChallengeId('Summarize FLEX records'), null);
+  const rows = retrieveChallengeRows({ rows: [
+    { Material: 'cotton', 'Oxygen percent': '21', Note: 'sample one' },
+    { Material: 'polymer', 'Oxygen percent': '30', Note: 'sample two' },
+    { Material: 'wool', 'Oxygen percent': '19', Note: 'other' },
+  ] }, 'PSI-25 oxygen polymer');
+  assert.equal(rows.length, 3);
+  assert.equal(rows[0].Material, 'polymer');
+});
 
 test('AI receives only a qualitative scope when a verified calculation is shown separately', () => {
   const context = buildModelContext({

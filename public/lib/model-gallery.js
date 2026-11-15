@@ -54,6 +54,7 @@ const copy = {
 };
 
 const escPath = (file) => `/models/${encodeURIComponent(file)}`;
+const conceptDiagram = (title, category, ar) => `<figure class="model-function-figure"><svg viewBox="0 0 480 150" role="img" aria-label="${esc(`${title}: conceptual function diagram`)}"><defs><marker id="modelArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0v6l7-3z" fill="currentColor"/></marker></defs><path d="M124 74h58m116 0h58" stroke="currentColor" stroke-width="3" marker-end="url(#modelArrow)" opacity=".8"/><rect x="12" y="39" width="112" height="70" rx="12"/><rect x="182" y="24" width="116" height="100" rx="18"/><rect x="356" y="39" width="112" height="70" rx="12"/><circle cx="240" cy="62" r="16"/><path d="M211 94h58" stroke="currentColor" stroke-width="3" opacity=".7"/><text x="68" y="67" text-anchor="middle">${ar?'ظروف':'INPUT'}</text><text x="68" y="87" text-anchor="middle">${ar?'اختبار':'CONDITION'}</text><text x="240" y="107" text-anchor="middle">${esc(category)}</text><text x="412" y="67" text-anchor="middle">${ar?'قياس':'OBSERVE'}</text><text x="412" y="87" text-anchor="middle">${ar?'دليل':'EVIDENCE'}</text></svg><figcaption>${ar?'مخطط مفاهيمي لوظيفة النموذج':'Conceptual function diagram'} · ${esc(title)} · ${ar?'توضيحي، لا يمثل نتيجة اختبار':'schematic, not a test result'}</figcaption></figure>`;
 
 export async function renderModelGallery(lang = 'en') {
   const ar = lang === 'ar';
@@ -105,7 +106,8 @@ export async function renderModelGallery(lang = 'en') {
         <model-viewer id="galleryModelViewer" class="model-viewer" src="${escPath(first.file)}" alt="${esc(first.title)}" camera-controls shadow-intensity="0.8" exposure="1" interaction-prompt="auto" loading="eager" reveal="auto"></model-viewer>
         <div class="concept-model-meta"><span id="galleryModelStatus" class="sub" role="status" aria-live="polite">${viewerAvailable ? t.loading : t.unavailable}</span><a id="galleryModelDownload" class="outline-btn" href="${escPath(first.file)}" download>${t.download}</a></div>
       </div>
-      <div class="model-inspector-details">
+        <div class="model-inspector-details">
+        <div id="galleryModelDiagram">${conceptDiagram(first.title.replace(/-/g, ' '), initial[ar ? 'categoryAr' : 'categoryEn'], ar)}</div>
         <div><span class="eyebrow" id="galleryModelCategory">${esc(initial[ar ? 'categoryAr' : 'categoryEn'])}</span><h3>${t.purpose}</h3><p id="galleryModelPurpose" class="sub">${esc(initial[ar ? 'purposeAr' : 'purposeEn'])}</p></div>
         <div><h3>${t.value}</h3><p id="galleryModelValue" class="sub">${esc(initial[ar ? 'valueAr' : 'valueEn'])}</p></div>
       </div>
@@ -178,6 +180,7 @@ export function bindModelGallery(root, lang = 'en') {
       root.querySelector('#galleryModelCategory').textContent = item.dataset[ar ? 'categoryAr' : 'categoryEn'];
       root.querySelector('#galleryModelPurpose').textContent = item.dataset[ar ? 'purposeAr' : 'purposeEn'];
       root.querySelector('#galleryModelValue').textContent = item.dataset[ar ? 'valueAr' : 'valueEn'];
+      root.querySelector('#galleryModelDiagram').innerHTML = conceptDiagram(title, item.dataset[ar ? 'categoryAr' : 'categoryEn'], ar);
       if (scenarioSelection) scenarioSelection.textContent = `${t.scenarioFor}: ${title}`;
       if (download) download.href = path;
       if (viewer && window.customElements?.get('model-viewer')) {

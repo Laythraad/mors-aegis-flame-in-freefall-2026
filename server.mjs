@@ -16,7 +16,7 @@ const API_PATHS = new Set([...ROUTES.keys()].map(key => key.split(' ')[1]));
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp4': 'video/mp4'
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml'
 };
 const ERROR_MESSAGES = {
   400: 'Request body must contain a valid JSON object.',

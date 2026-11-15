@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const css = await readFile(path.join(root, 'public', 'app.css'), 'utf8');
+const customizationCss = await readFile(path.join(root, 'public', 'theme-customization.css'), 'utf8');
 
 function rgb(hex) {
   const expanded = hex.length === 4 ? `#${[...hex.slice(1)].map((channel) => `${channel}${channel}`).join('')}` : hex;
@@ -43,6 +44,21 @@ test('dark-theme body and muted text meet WCAG AA contrast on content surfaces',
   for (const background of [token('--bg'), token('--surface'), token('--surface2')]) {
     assert.ok(contrast(ink, background) >= 7, `primary text contrast must be at least 7:1 on ${background}`);
     assert.ok(contrast(muted, background) >= 4.5, `secondary text contrast must be at least 4.5:1 on ${background}`);
+  }
+});
+
+test('Black Hole theme text, muted text and cyan accent retain readable contrast', () => {
+  const blackhole = customizationCss.match(/body\.theme-blackhole\s*\{([^}]+)\}/)?.[1];
+  assert.ok(blackhole, 'Black Hole theme variables must exist');
+  const token = (name) => blackhole.match(new RegExp(`${name}:(#[\\da-f]{6})`, 'i'))?.[1];
+  const ink = token('--ink');
+  const muted = token('--muted');
+  for (const background of [token('--bg'), token('--surface'), token('--surface2')]) {
+    assert.ok(contrast(ink, background) >= 7, `primary text contrast must be at least 7:1 on ${background}`);
+    assert.ok(contrast(muted, background) >= 4.5, `secondary text contrast must be at least 4.5:1 on ${background}`);
+  }
+  for (const accent of [token('--accent'), token('--link'), token('--eyebrow')]) {
+    assert.ok(contrast(accent, token('--surface')) >= 4.5, `accent ${accent} must contrast with the dark surface`);
   }
 });
 
