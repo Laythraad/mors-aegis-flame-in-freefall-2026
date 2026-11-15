@@ -74,7 +74,7 @@ function localAnswer(rows, question, { analysis, comparison, association, record
     const perGroup = r.groups.length ? ` By group: ${groupLines(r.groups, g => `${g.label}: ${g.mean === null ? 'no values' : `${num(g.mean)}${unit}, ${ciText(g.ci95)}`} (n=${g.n})`)}.` : '';
     return `${scope} Computed descriptive mean ${analysis.recipe.variable}: ${num(r.mean)}${unit} (n=${r.n}, ${ciText(r.ci95)}).${perGroup} Bootstrap CIs (seed ${analysis.recipe.bootstrap.seed}, ${analysis.recipe.bootstrap.resamples} resamples) reflect resampling of these records, not measurement uncertainty. ${source}`;
   }
-  if (INTENT.limits.test(question)) return `The bundled table has no image sequences or instrument uncertainty, and pools different fuels, pressures and diluents; conclusions are descriptive only. ${source}`;
+  if (INTENT.limits.test(question)) return `The PSI-69 table combines tests with different fuels, pressures and diluent gases, so pooled values are descriptive and do not isolate one condition. Missing values are excluded per variable. Bootstrap confidence intervals are resampling intervals, not instrument uncertainty; the calculator withholds an interval when fewer than ${MIN_CI_N} usable observations are available for that metric. The bundled table does not include image sequences or instrument-uncertainty values. ${source}`;
   if (INTENT.compare.test(question)) return `Name two experiment IDs to compare, for example ${rows.slice(0, 2).map(row => row.id).join(' and ')}. ${source}`;
   if (INTENT.records.test(question)) return `The bundled table has ${rows.length} experiments; for example ${rows.slice(0, 8).map(row => row.id).join(', ')}. ${source}`;
   return `The available FLEX records and analysis tools cannot answer this question as stated. Ask for a named measurement mean, a diameter–burning-rate association, or a comparison between two experiment IDs. ${source}`;
@@ -177,6 +177,10 @@ async function copilot(req, res, url, ip) {
   const { tools, executed, mentioned, stratum } = selectTools(rows, question, version, filter);
   const fallback = () => localAnswer(rows, question, tools);
   const offline = (status, extra = {}) => send(res, 200, { status, provider: 'deterministic local summary', answer: fallback(), citation, toolsExecuted: executed, analysis: tools.analysis, filter, ...extra });
+  // The small local model repeatedly invented unsupported confidence-interval claims for
+  // limitation questions. These are fully answerable from known evidence boundaries, so
+  // return the deterministic, source-cited summary instead of asking a generative model.
+  if (INTENT.limits.test(question)) return offline('grounded-summary');
   if (tools.emptyStratum) return send(res, 200, { status: 'unsupported', provider: 'deterministic local summary', answer: fallback(), citation, toolsExecuted: executed, filter });
 
   const contextual = INTENT.limits.test(question) || INTENT.records.test(question);

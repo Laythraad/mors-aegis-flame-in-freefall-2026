@@ -1,4 +1,9 @@
 # Changelog
+## 3.0.0-alpha.12 — 2026-11-15
+
+- Route limitation questions to a deterministic source-cited answer after the local model repeated unsupported claims about confidence intervals.
+- Clarified the supported PSI-69 limits, including per-variable missingness and the minimum sample threshold for bootstrap intervals.
+
 ## 3.0.0-alpha.11 — 2026-11-15
 
 - Tightened AI evidence grounding: factual claims and numeric thresholds must come directly from supplied NASA PSI context; limitation answers cannot add unsupported items.

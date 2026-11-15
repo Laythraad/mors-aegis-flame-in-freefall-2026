@@ -40,3 +40,6 @@ Use prerelease increments such as `3.0.0-alpha.3`, `3.0.0-alpha.4`, and so on un
 
 - `backup/pre-v3.0.0-alpha.10-20261115-145424`: ZIP and tag snapshot before tightening AI evidence grounding.
 - `v3.0.0-alpha.11`: Copilot answers stay within explicit PSI context; limitation questions are restricted to documented facts.
+
+- `backup/pre-v3.0.0-alpha.11-20261115-145804`: ZIP and tag snapshot before routing limitation questions to deterministic evidence summaries.
+- `v3.0.0-alpha.12`: deterministic, source-cited limits answers; local Qwen remains active for bounded research questions.
