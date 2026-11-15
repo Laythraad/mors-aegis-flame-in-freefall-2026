@@ -1,4 +1,9 @@
 # Changelog
+## 3.0.0-alpha.18 — 2026-11-15
+
+- Give the AI a bounded, analysis-specific explanation of averages, associations, comparisons, and source-record lookups.
+- Shorten deterministic-result AI generation to a single, validated plain-language sentence.
+
 ## 3.0.0-alpha.17 — 2026-11-15
 
 - Simplified the quantitative AI prompt to one evidence-bounded scope task, removing conflicting instructions that led Qwen to deny available results.

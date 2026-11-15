@@ -58,3 +58,6 @@ Use prerelease increments such as `3.0.0-alpha.3`, `3.0.0-alpha.4`, and so on un
 
 - `backup/pre-v3.0.0-alpha.16-20261115-153151`: ZIP and tag snapshot before simplifying the AI prompt and correcting the health-check runtime dependency.
 - `v3.0.0-alpha.17`: non-conflicting scope-only AI prompts plus a working Coolify HTTP health-check dependency.
+
+- `backup/pre-v3.0.0-alpha.17-20261115-153621`: ZIP and tag snapshot before supplying analysis-specific, bounded Copilot meanings.
+- `v3.0.0-alpha.18`: the AI explains the scope of averages, associations, comparisons, and source-row lookups in one validated sentence.

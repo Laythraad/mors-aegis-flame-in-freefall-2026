@@ -10,6 +10,7 @@ test('AI receives only a qualitative scope when a verified calculation is shown 
   }, true);
   assert.equal(context.analysisType, 'descriptive summary');
   assert.equal(context.verifiedResultDisplayedSeparately, true);
+  assert.match(context.approvedMeaning, /average summarizes the selected group/);
   assert.equal(JSON.stringify(context).includes('0.52'), false);
   assert.equal(JSON.stringify(context).includes('sensitiveRawData'), false);
 });
@@ -22,7 +23,7 @@ test('non-quantitative AI questions retain their source context', () => {
 test('quantitative AI prompt has a single plain-language scope task', () => {
   const prompt = buildSystemPrompt({ verifiedResultDisplayedSeparately: true }, 'Local Ollama');
   assert.match(prompt, /numeric answer has already been computed/);
-  assert.match(prompt, /descriptive and belongs to the selected NASA source-table context/);
+  assert.match(prompt, /paraphrase Evidence JSON\.approvedMeaning/);
   assert.doesNotMatch(prompt, /When a number or fact is absent/);
 });
 
