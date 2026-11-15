@@ -46,3 +46,6 @@ Use prerelease increments such as `3.0.0-alpha.3`, `3.0.0-alpha.4`, and so on un
 
 - `backup/pre-v3.0.0-alpha.12-20261115-150421`: ZIP and tag snapshot before the full test/lint reconciliation and verification-report refresh.
 - `v3.0.0-alpha.13`: refreshed 36-plot deck/docs and corrected public-mode tests and lint configuration.
+
+- `backup/pre-v3.0.0-alpha.13-20261115-151231`: ZIP and tag snapshot before separating authoritative results from generated interpretation.
+- `v3.0.0-alpha.14`: deterministic results remain primary; generated qualitative interpretation is separately validated and displayed.

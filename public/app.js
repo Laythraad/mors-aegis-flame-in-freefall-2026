@@ -812,11 +812,13 @@ async function submitChat(event) {
     const result = await post('/api/copilot', { question, history });
     const provider =
       result.status === 'live'
-        ? `${result.provider || 'AI INTERPRETATION'} · ${result.model || ''}`
+        ? `${result.provider || 'AI INTERPRETATION'} · ${result.model || ''}${result.verifiedAnswer ? ' · QUALITATIVE NOTE' : ''}`
         : (result.provider || 'DETERMINISTIC LOCAL SUMMARY').toUpperCase();
     chatThread.push({
       role: 'assistant',
-      content: result.answer || 'No text was returned. Please try again.',
+      content: result.verifiedAnswer
+        ? `${result.verifiedAnswer}\n\n${lang === 'ar' ? 'تفسير نوعي مولّد بالذكاء الاصطناعي (ليس قياسًا):' : 'AI qualitative interpretation (not a measurement):'}\n${result.answer}`
+        : result.answer || 'No text was returned. Please try again.',
       provider,
       citation: true,
       toolsExecuted: result.toolsExecuted || [],

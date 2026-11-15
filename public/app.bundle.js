@@ -4465,10 +4465,13 @@ void main() {
     $("#chatSend").disabled = true;
     try {
       const result = await post("/api/copilot", { question, history });
-      const provider = result.status === "live" ? `${result.provider || "AI INTERPRETATION"} \xB7 ${result.model || ""}` : (result.provider || "DETERMINISTIC LOCAL SUMMARY").toUpperCase();
+      const provider = result.status === "live" ? `${result.provider || "AI INTERPRETATION"} \xB7 ${result.model || ""}${result.verifiedAnswer ? " \xB7 QUALITATIVE NOTE" : ""}` : (result.provider || "DETERMINISTIC LOCAL SUMMARY").toUpperCase();
       chatThread.push({
         role: "assistant",
-        content: result.answer || "No text was returned. Please try again.",
+        content: result.verifiedAnswer ? `${result.verifiedAnswer}
+
+${lang === "ar" ? "\u062A\u0641\u0633\u064A\u0631 \u0646\u0648\u0639\u064A \u0645\u0648\u0644\u0651\u062F \u0628\u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064A (\u0644\u064A\u0633 \u0642\u064A\u0627\u0633\u064B\u0627):" : "AI qualitative interpretation (not a measurement):"}
+${result.answer}` : result.answer || "No text was returned. Please try again.",
         provider,
         citation: true,
         toolsExecuted: result.toolsExecuted || []

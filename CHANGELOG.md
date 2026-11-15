@@ -1,4 +1,9 @@
 # Changelog
+## 3.0.0-alpha.14 — 2026-11-15
+
+- Display deterministic source-cited results separately from the local AI's qualitative note; reject numeric, universal, causal, or safety claims from generated interpretation.
+- Added regression checks for the AI-response boundary and clarified that calculations remain authoritative.
+
 ## 3.0.0-alpha.13 — 2026-11-15
 
 - Corrected network-mode documentation and tests for the public, login-free read-only site and its trusted Copilot exception.
